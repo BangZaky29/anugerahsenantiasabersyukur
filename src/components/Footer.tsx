@@ -1,4 +1,4 @@
-import logo from '@/src/assets/logo-2.png';
+import logo from '@/src/assets/logo-3.png';
 
 export function Footer() {
   return (
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 w-full h-1 bg-asb-gold dark:bg-gradient-to-r dark:from-asb-gold dark:via-asb-green-light dark:to-asb-green-dark transition-all duration-300"></div>
 
       {/* Subtle Background Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: 'radial-gradient(#E6C156 1px, transparent 1px)',
@@ -19,10 +19,10 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-8 border-b border-gray-200 dark:border-gray-800 pb-8 transition-colors duration-300">
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="flex items-center gap-4">
-              <img 
-                src={logo} 
-                alt="PT ASB Logo" 
-                className="w-24 sm:w-32 h-24 sm:h-32 object-contain shadow-sm dark:shadow-asb-gold/20" 
+              <img
+                src={logo}
+                alt="PT ASB Logo"
+                className="w-24 sm:w-32 h-24 sm:h-32 object-contain shadow-sm dark:shadow-asb-gold/20"
               />
               <span className="font-bold text-asb-green-dark dark:text-white text-xl tracking-wide transition-colors duration-300">PT ANUGERAH SENANTIASA BERSYUKUR</span>
             </div>
@@ -30,7 +30,7 @@ export function Footer() {
               Integrated Industrial Solutions & Equipment Provider. Committed to growing together with our customers since 2026.
             </p>
           </div>
-          
+
           <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4 mt-4 md:mt-0">
             <a href="#home" className="text-gray-600 dark:text-gray-400 hover:text-asb-gold dark:hover:text-asb-gold transition-colors text-sm font-medium">Home</a>
             <a href="#about" className="text-gray-600 dark:text-gray-400 hover:text-asb-gold dark:hover:text-asb-gold transition-colors text-sm font-medium">About Us</a>
