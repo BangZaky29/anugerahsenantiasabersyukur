@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Sun, Moon } from 'lucide-react';
-import logo from '@/src/assets/logo-2.png';
+import logo from '@/src/assets/logo-3.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +35,7 @@ export function Navbar() {
                 alt="PT ASB Logo"
                 className="w-20 sm:w-24 h-20 sm:h-24 object-contain transition-all hover:scale-110"
               />
+              <span className="font-bold text-asb-green-dark dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-asb-gold dark:via-asb-green-light dark:to-asb-green-dark text-xl hidden sm:block transition-all">PT ANUGERAH SENANTIASA BERSYUKUR</span>
             </a>
           </div>
 

@@ -1,13 +1,14 @@
 import { motion } from 'motion/react';
+import heroImage from '@/src/assets/kontraktor-1.jpeg';
 
 export function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+          backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -16,7 +17,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -24,8 +25,8 @@ export function Hero() {
         >
           Integrated Industrial Solutions & Equipment Provider Since 2026
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -33,14 +34,14 @@ export function Hero() {
         >
           ASB is here to make it easier for you to find the best products that suit your needs, with a commitment to growing together with our customers.
         </motion.p>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <a 
-            href="#products" 
+          <a
+            href="#products"
             className="inline-block bg-asb-gold dark:bg-gradient-to-r dark:from-asb-gold dark:via-asb-green-light dark:to-asb-green-dark text-asb-black dark:text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-yellow-400 dark:hover:scale-105 transition-all shadow-lg dark:border dark:border-white/10"
           >
             Explore Our Products
