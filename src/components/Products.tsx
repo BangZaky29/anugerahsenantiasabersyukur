@@ -54,14 +54,17 @@ const productsData: Category[] = [
 const BrandCard = ({ brand }: { brand: Brand }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const toggleHover = () => setIsHovered(!isHovered);
+
   return (
     <div 
       className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={toggleHover}
     >
       <motion.div
-        whileHover={{ scale: 1.05 }}
+        animate={{ scale: isHovered ? 1.05 : 1 }}
         className="group relative cursor-pointer bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm transition-all duration-500 overflow-hidden"
       >
         {/* Placeholder for Logo - In a real app, replace with <img src={brand.logo} /> */}
@@ -81,22 +84,22 @@ const BrandCard = ({ brand }: { brand: Brand }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute inset-0 bg-asb-green-dark/95 dark:bg-asb-green-dark/95 p-6 flex flex-col justify-center text-white z-20"
+              className="absolute inset-0 bg-asb-green-dark/95 dark:bg-asb-green-dark/95 p-4 sm:p-5 flex flex-col justify-start text-white z-20 overflow-y-auto custom-scrollbar scroll-smooth"
             >
-              <h4 className="font-bold text-asb-gold mb-2 text-lg uppercase tracking-wider">{brand.name}</h4>
-              <p className="text-xs text-gray-200 mb-4 line-clamp-2">{brand.description}</p>
+              <h4 className="font-bold text-asb-gold mb-1 text-base sm:text-lg uppercase tracking-wider">{brand.name}</h4>
+              <p className="text-[10px] sm:text-xs text-gray-200 mb-3 leading-relaxed">{brand.description}</p>
               
-              <div className="space-y-1">
-                <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">Featured Products:</p>
+              <div className="space-y-1 mb-4">
+                <p className="text-[9px] sm:text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">Featured Products:</p>
                 {brand.products.map((p, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs">
-                    <div className="w-1 h-1 bg-asb-gold rounded-full" />
+                  <div key={i} className="flex items-center gap-2 text-[10px] sm:text-xs">
+                    <div className="w-1 h-1 bg-asb-gold rounded-full shrink-0" />
                     <span className="font-medium">{p}</span>
                   </div>
                 ))}
               </div>
               
-              <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] font-bold">
+              <div className="mt-auto pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-bold shrink-0">
                 <span className="flex items-center gap-1"><ShieldCheck size={12} className="text-asb-gold" /> GENUINE</span>
                 <span className="flex items-center gap-1 active:text-asb-gold transition-colors">EXPLORE <ExternalLink size={10} /></span>
               </div>
