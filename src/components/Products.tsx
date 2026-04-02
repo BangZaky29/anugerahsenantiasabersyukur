@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Award, ShieldCheck, Box } from 'lucide-react';
+import { ShieldCheck, ChevronDown } from 'lucide-react';
 
 interface Brand {
   name: string;
-  logo?: string;
   products: string[];
   description: string;
 }
@@ -17,6 +16,22 @@ interface Category {
 
 const productsData: Category[] = [
   {
+    title: 'Machine Products',
+    description: 'Advanced CNC and manufacturing machinery for precision production.',
+    brands: [
+      { name: 'DN SOLUTIONS', products: ['CNC Milling', 'Lathe Machines'], description: 'Modern manufacturing solutions.' },
+      { name: 'MAKINO', products: ['Horizontal Milling', 'EDM Machines'], description: 'Extreme precision engineering.' },
+      { name: 'HNK', products: ['Vertical Lathes', 'Boring Machines'], description: 'Specialized heavy-duty machines.' },
+      { name: 'KERTZ', products: ['Precision Cutting', 'Milling'], description: 'High-end industrial machinery.' },
+      { name: 'TONE FAN', products: ['Radial Drilling', 'Industrial Drills'], description: 'Manufacturing drilling specialists.' },
+      { name: 'MAZAK', products: ['Multi-tasking CNC', '5-Axis Machining', 'Turning Centers'], description: 'Global leader in advanced CNC machine tools.' },
+      { name: 'BROTHER', products: ['SPEEDIO Tapping Centers', 'High-Speed CNC'], description: 'Compact, high-productivity CNC machining.' },
+      { name: 'WELE', products: ['Bridge/Double-Column Machining', 'Boring Machines'], description: 'Large-scale, heavy-duty CNC machinery.' },
+      { name: 'SODICK', products: ['Wire & Sinker EDM', 'High-Speed Milling', 'Metal 3D Printing'], description: 'Pioneer in precision Electrical Discharge Machining.' },
+      { name: 'HYPERTHERM', products: ['Plasma Cutting Systems', 'CNC Motion Control'], description: 'World leader in industrial cutting solutions.' },
+    ],
+  },
+  {
     title: 'Tools Products',
     description: 'Precision engineering and heavy-duty durability for industrial applications.',
     brands: [
@@ -25,7 +40,7 @@ const productsData: Category[] = [
       { name: 'TEKIRO', products: ['Hand Tools', 'Automotive Tools'], description: 'Leading industrial tool brand.' },
       { name: 'MAKITA', products: ['Cordless Drill', 'Grinder', 'Circular Saw'], description: 'Global leader in power tools.' },
       { name: 'BOSCH', products: ['Power Tools', 'Measuring Tools'], description: 'Reliable German engineering.' },
-      { name: 'HYTORC', products: ['Hydraulic Torque Wrench', 'Bolt Tensioners'], description: 'The worlds primary bolting solution.' },
+      { name: 'HYTORC', products: ['Hydraulic Torque Wrench', 'Bolt Tensioners'], description: 'The world\'s primary bolting solution.' },
     ],
   },
   {
@@ -38,130 +53,148 @@ const productsData: Category[] = [
       { name: 'LINCOLN', products: ['Auto Lubrication', 'Welding Gear'], description: 'Industrial maintenance experts.' },
     ],
   },
-  {
-    title: 'Machine Products',
-    description: 'Advanced CNC and manufacturing machinery for precision production.',
-    brands: [
-      { name: 'DN SOLUTIONS', products: ['CNC Milling', 'Lathe Machines'], description: 'Modern manufacturing solutions.' },
-      { name: 'MAKINO', products: ['Horizontal Milling', 'EDM Machines'], description: 'Extreme precision engineering.' },
-      { name: 'HNK', products: ['Vertical Lathes', 'Boring Machines'], description: 'Specialized heavy-duty machines.' },
-      { name: 'KERTZ', products: ['Precision Cutting', 'Milling'], description: 'High-end industrial machinery.' },
-      { name: 'TONE FAN', products: ['Radial Drilling', 'Industrial Drills'], description: 'Manufacturing drilling specialists.' },
-    ],
-  },
 ];
 
-const BrandCard = ({ brand }: { brand: Brand }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const toggleHover = () => setIsHovered(!isHovered);
+function BrandCard({ brand }: { brand: Brand }) {
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div 
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={toggleHover}
+    <motion.div
+      layout
+      onClick={() => setIsExpanded(!isExpanded)}
+      className="group cursor-pointer bg-asb-white dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-asb-gold/30 dark:hover:border-asb-gold/20 transition-all duration-500 overflow-hidden"
     >
-      <motion.div
-        animate={{ scale: isHovered ? 1.05 : 1 }}
-        className="group relative cursor-pointer bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm transition-all duration-500 overflow-hidden"
-      >
-        {/* Placeholder for Logo - In a real app, replace with <img src={brand.logo} /> */}
-        <div className="flex flex-col items-center justify-center h-24 sm:h-32 transition-all duration-500 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:opacity-100">
-          <div className="w-12 h-12 mb-3 rounded-full bg-asb-gold/10 flex items-center justify-center text-asb-gold opacity-40 group-hover:opacity-100 transition-opacity">
-            <Award size={24} />
+      {/* Brand Header */}
+      <div className="p-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-asb-gold/10 flex items-center justify-center">
+            <ShieldCheck size={14} className="text-asb-gold" />
           </div>
-          <span className="text-xl font-bold text-gray-400 group-hover:text-asb-green-dark dark:group-hover:text-asb-gold transition-colors tracking-tight">
+          <span className="font-heading text-sm font-bold text-asb-black/80 dark:text-white tracking-tight">
             {brand.name}
           </span>
         </div>
+        <motion.div
+          animate={{ rotate: isExpanded ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-asb-black/30 dark:text-gray-600"
+        >
+          <ChevronDown size={16} />
+        </motion.div>
+      </div>
 
-        {/* Brand Popover Info */}
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="absolute inset-0 bg-asb-green-dark/95 dark:bg-asb-green-dark/95 p-4 sm:p-5 flex flex-col justify-start text-white z-20 overflow-y-auto custom-scrollbar scroll-smooth"
-            >
-              <h4 className="font-bold text-asb-gold mb-1 text-base sm:text-lg uppercase tracking-wider">{brand.name}</h4>
-              <p className="text-[10px] sm:text-xs text-gray-200 mb-3 leading-relaxed">{brand.description}</p>
-              
-              <div className="space-y-1 mb-4">
-                <p className="text-[9px] sm:text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">Featured Products:</p>
+      {/* Expandable Details */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="px-5 pb-5 border-t border-gray-50 dark:border-gray-700/50 pt-4">
+              <p className="text-xs text-asb-black/50 dark:text-gray-500 mb-3 leading-relaxed">{brand.description}</p>
+
+              <div className="space-y-1.5">
+                <p className="text-[10px] font-semibold text-asb-black/30 dark:text-gray-600 uppercase tracking-widest">Products</p>
                 {brand.products.map((p, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[10px] sm:text-xs">
+                  <div key={i} className="flex items-center gap-2 text-xs text-asb-black/60 dark:text-gray-400">
                     <div className="w-1 h-1 bg-asb-gold rounded-full shrink-0" />
-                    <span className="font-medium">{p}</span>
+                    <span>{p}</span>
                   </div>
                 ))}
               </div>
-              
-              <div className="mt-auto pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-bold shrink-0">
-                <span className="flex items-center gap-1"><ShieldCheck size={12} className="text-asb-gold" /> GENUINE</span>
-                <span className="flex items-center gap-1 active:text-asb-gold transition-colors">EXPLORE <ExternalLink size={10} /></span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
-};
+}
 
 export function Products() {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
-    <section id="products" className="py-32 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden">
-      {/* Decorative background logo */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-asb-gold/5 blur-[120px] rounded-full -mr-48 -mt-48" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-asb-green-light/5 blur-[120px] rounded-full -ml-48 -mb-48" />
+    <section id="products" className="py-28 lg:py-36 bg-asb-white dark:bg-gray-950 section-divider transition-colors duration-500 relative overflow-hidden">
+      {/* Subtle background orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-asb-gold/3 blur-[150px] rounded-full -mr-64 -mt-64 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-asb-green-light/3 blur-[150px] rounded-full -ml-64 -mb-64 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        {/* Section Header */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-asb-gold/10 border border-asb-gold/20 text-asb-gold text-[10px] font-bold uppercase tracking-widest mb-4">
-            <Box size={14} /> Global Industrial Partnerships
-          </div>
-          <h2 className="text-4xl md:text-5xl font-black text-asb-green-dark dark:text-white mb-6 tracking-tight">
-            Integrated <span className="text-transparent bg-clip-text bg-gradient-to-r from-asb-gold to-asb-green-light">Product Range</span>
+          <span className="text-asb-gold text-xs font-semibold uppercase tracking-[0.2em]">Our Partners</span>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-asb-green-dark dark:text-white mt-3 leading-tight">
+            Integrated{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-asb-gold to-asb-green-light">Product Range</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            ASB provides premium solutions for mining, healthcare, and manufacturing through strategic partnerships with the worlds most trusted brands.
+          <p className="text-sm text-asb-black/50 dark:text-gray-500 max-w-lg mt-4 leading-relaxed">
+            ASB provides premium solutions through strategic partnerships with the world's most trusted brands.
           </p>
         </motion.div>
 
-        <div className="space-y-24">
-          {productsData.map((category, catIdx) => (
-            <div key={catIdx}>
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-                <div className="max-w-xl">
-                  <h3 className="text-2xl md:text-3xl font-black text-asb-green-dark dark:text-white mb-2 uppercase tracking-tighter">
-                    {category.title}
-                  </h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-relaxed">
-                    {category.description}
-                  </p>
-                </div>
-                <div className="h-px flex-grow bg-gray-200 dark:bg-gray-800 mx-8 hidden lg:block" />
-                <span className="text-xs font-bold text-asb-gold tracking-widest whitespace-nowrap">
-                  {category.brands.length} PREMIIUM BRANDS
+        {/* Category Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap gap-2 mb-12"
+        >
+          {productsData.map((category, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveTab(idx)}
+              className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeTab === idx
+                  ? 'bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black shadow-lg'
+                  : 'bg-asb-surface dark:bg-gray-800 text-asb-black/50 dark:text-gray-400 hover:text-asb-black/80 dark:hover:text-gray-200'
+              }`}
+            >
+              {category.title}
+              {activeTab === idx && (
+                <span className="ml-2 text-xs opacity-60">
+                  {category.brands.length}
                 </span>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                {category.brands.map((brand, bIdx) => (
-                  <BrandCard key={bIdx} brand={brand} />
-                ))}
-              </div>
-            </div>
+              )}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Active Category Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="mb-8">
+              <p className="text-sm text-asb-black/50 dark:text-gray-500">
+                {productsData[activeTab].description}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {productsData[activeTab].brands.map((brand, bIdx) => (
+                <motion.div
+                  key={brand.name}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: bIdx * 0.05 }}
+                >
+                  <BrandCard brand={brand} />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

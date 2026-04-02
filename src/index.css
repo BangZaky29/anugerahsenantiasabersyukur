@@ -3,20 +3,42 @@
 
 @theme {
   --color-asb-gold: #E6C156;
+  --color-asb-gold-light: #F0D68A;
   --color-asb-green-dark: #0B5B30;
   --color-asb-green-light: #67B634;
-  --color-asb-black: #1A1A1A;
-  --color-asb-white: #FFFFFF;
+  --color-asb-black: #2D2D2D;
+  --color-asb-white: #FAFAF8;
+  --color-asb-surface: #F3F3EF;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Base */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar for Brand Cards */
+body {
+  background-color: var(--color-asb-white);
+  color: var(--color-asb-black);
+}
+
+/* Headings — use Outfit */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-asb-gold);
+  color: var(--color-asb-black);
+}
+
+/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -31,4 +53,58 @@ html {
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--color-asb-gold) transparent;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-asb-gold), var(--color-asb-green-light));
+  z-index: 9999;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Section divider — subtle diagonal */
+.section-divider {
+  position: relative;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-asb-gold), transparent);
+  opacity: 0.3;
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(250, 250, 248, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-dark {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-asb-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
