@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anugerahsenantiasabersyukur.com/sitemap.xml
