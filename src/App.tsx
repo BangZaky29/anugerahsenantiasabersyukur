@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Services } from './components/Services';
 import { Products } from './components/Products';
+import { BrandGallery } from './components/BrandGallery';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
@@ -47,6 +48,7 @@ export default function App() {
           <About />
           <Services />
           <Products />
+          <BrandGallery />
           <Contact />
           <Footer />
           <WhatsAppWidget />
