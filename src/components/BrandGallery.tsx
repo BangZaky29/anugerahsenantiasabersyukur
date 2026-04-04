@@ -132,7 +132,7 @@ export function BrandGallery() {
   return (
     <section
       id="brand-gallery"
-      className="py-28 lg:py-36 bg-asb-surface dark:bg-gray-900 section-divider transition-colors duration-500 relative overflow-hidden"
+      className="py-28 lg:py-36 bg-asb-white dark:bg-gray-950 section-divider transition-colors duration-500 relative overflow-hidden"
     >
       {/* Background Orbs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-asb-gold/5 blur-[180px] rounded-full -mr-80 -mt-80 pointer-events-none" />
