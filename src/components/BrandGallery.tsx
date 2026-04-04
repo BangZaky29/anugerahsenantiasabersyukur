@@ -64,7 +64,7 @@ function PhotoLogo({ photo, index }: { photo: Photo; index: number }) {
     >
       <div className="relative dark:bg-white/95 dark:px-4 dark:py-3 dark:rounded-2xl dark:shadow-xl dark:border dark:border-white/20 transition-all duration-300 group-hover:shadow-2xl">
         <img
-          src={photo.url}
+          src={`${API_URL}/${photo.filepath}`}
           alt={displayName}
           loading="lazy"
           onLoad={() => setImgLoaded(true)}
