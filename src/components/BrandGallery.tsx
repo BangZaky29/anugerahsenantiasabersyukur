@@ -105,18 +105,21 @@ export function BrandGallery() {
   // Fetch photos
   useEffect(() => {
     setLoading(true);
+    setPhotos([]); // Clear existing photos to ensure clean exit animation
     setError(null);
 
     const url = activeCategory
       ? `${API_URL}/api/photos?category_id=${activeCategory}`
       : `${API_URL}/api/photos`;
 
-    fetch(url)
-      .then((r) => {
+    Promise.all([
+      fetch(url).then(r => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
-      })
-      .then((data) => {
+      }),
+      new Promise(resolve => setTimeout(resolve, 800)) // 800ms minimum delay for premium animation feel
+    ])
+      .then(([data]) => {
         if (data.success) {
           setPhotos(data.data);
         } else {
