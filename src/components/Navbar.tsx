@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-
 import { Menu, X, Phone, Sun, Moon, ChevronDown, LayoutGrid } from 'lucide-react';
 import logo from '@/src/assets/logo-3.png';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 interface Brand {
   id: number;
@@ -22,11 +22,11 @@ export function Navbar() {
   // Mega menu states
   const [isProductHovered, setIsProductHovered] = useState(false);
   const [isMobileProductOpen, setIsMobileProductOpen] = useState(false);
-  
+
   const [brands, setBrands] = useState<Brand[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>('Semua');
 
-  const filters = ['Semua', 'Mechanical', 'Electrical', 'Mesin', 'Tools'];
+  const filters = ['All', 'Mechanical', 'Electrical', 'Machine ', 'Tools'];
 
   const { scrollY } = useScroll();
 
@@ -83,19 +83,19 @@ export function Navbar() {
   const BrandLogoItem = ({ brand }: { brand: Brand }) => {
     const photo = brand.photos && brand.photos.length > 0 ? brand.photos[0] : null;
     const displayName = brand.name;
-    
+
     return (
-      <a 
-        href={brand.external_link || '#'} 
-        target={brand.external_link ? "_blank" : "_self"} 
+      <a
+        href={brand.external_link || '#'}
+        target={brand.external_link ? "_blank" : "_self"}
         rel="noreferrer"
         className="group relative flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-100 dark:hover:border-gray-700/50 block"
       >
         <div className="h-10 sm:h-12 w-full flex items-center justify-center mb-2">
           {photo ? (
-            <img 
-              src={`${API_URL}/${photo.filepath}`} 
-              alt={displayName} 
+            <img
+              src={`${API_URL}/${photo.filepath}`}
+              alt={displayName}
               className="max-h-full max-w-full object-contain filter brightness-100 dark:brightness-200 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm"
             />
           ) : (
@@ -114,13 +114,12 @@ export function Navbar() {
       initial={{ y: 0 }}
       animate={{ y: isHidden && !isOpen ? -100 : 0 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        isOpen
+      className={`fixed w-full z-50 transition-all duration-500 ${isOpen
           ? 'bg-asb-white dark:bg-gray-900 shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
           : showSolid
             ? 'glass dark:glass-dark shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
             : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 lg:h-18">
@@ -132,11 +131,10 @@ export function Navbar() {
                 alt="PT ASB Logo"
                 className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <span className={`font-heading font-bold text-sm lg:text-base hidden sm:block transition-all duration-300 ${
-                showSolid
+              <span className={`font-heading font-bold text-sm lg:text-base hidden sm:block transition-all duration-300 ${showSolid
                   ? 'text-asb-green-dark dark:text-white'
                   : 'text-white'
-              }`}>
+                }`}>
                 PT ASB
               </span>
             </a>
@@ -147,19 +145,18 @@ export function Navbar() {
             {links.map((link) => {
               if (link.isDropdown) {
                 return (
-                  <div 
-                    key={link.name} 
+                  <div
+                    key={link.name}
                     className="relative py-4"
                     onMouseEnter={() => setIsProductHovered(true)}
                     onMouseLeave={() => setIsProductHovered(false)}
                   >
-                     <a
+                    <a
                       href={link.href}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group flex items-center gap-1 ${
-                        showSolid
+                      className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group flex items-center gap-1 ${showSolid
                           ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
                           : 'text-white/80 hover:text-white'
-                      } ${isProductHovered ? (showSolid ? 'text-asb-green-dark dark:text-white' : 'text-white') : ''}`}
+                        } ${isProductHovered ? (showSolid ? 'text-asb-green-dark dark:text-white' : 'text-white') : ''}`}
                     >
                       {link.name}
                       <ChevronDown size={14} className={`transition-transform duration-300 ${isProductHovered ? 'rotate-180' : ''}`} />
@@ -188,24 +185,23 @@ export function Navbar() {
                                     <button
                                       key={filter}
                                       onClick={() => setActiveFilter(filter)}
-                                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                                        activeFilter === filter 
-                                        ? 'bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black shadow-md shadow-asb-green-dark/20' 
-                                        : 'text-asb-black/70 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-asb-green-dark dark:hover:text-gray-200'
-                                      }`}
+                                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeFilter === filter
+                                          ? 'bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black shadow-md shadow-asb-green-dark/20'
+                                          : 'text-asb-black/70 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-asb-green-dark dark:hover:text-gray-200'
+                                        }`}
                                     >
                                       {filter}
                                     </button>
                                   ))}
                                 </div>
-                                
+
                                 {/* Right Side: Logo Grid */}
                                 <div className="w-2/3 xl:w-3/4 pl-2 lg:h-[300px] overflow-y-auto custom-scrollbar">
                                   {filteredBrands.length === 0 ? (
-                                     <div className="flex flex-col items-center justify-center h-full text-center p-6 opacity-60">
-                                       <LayoutGrid className="w-10 h-10 mb-3 text-gray-300 dark:text-gray-600" />
-                                       <span className="text-sm dark:text-gray-400">Tidak ada brand untuk kategori ini</span>
-                                     </div>
+                                    <div className="flex flex-col items-center justify-center h-full text-center p-6 opacity-60">
+                                      <LayoutGrid className="w-10 h-10 mb-3 text-gray-300 dark:text-gray-600" />
+                                      <span className="text-sm dark:text-gray-400">Tidak ada brand untuk kategori ini</span>
+                                    </div>
                                   ) : (
                                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 pb-2">
                                       {filteredBrands.map(brand => (
@@ -217,10 +213,10 @@ export function Navbar() {
                               </div>
                             </div>
                             <div className="bg-gray-50 dark:bg-gray-800/80 p-4 border-t border-gray-100 dark:border-gray-800">
-                               <a href="#brand-gallery" className="text-xs font-bold uppercase tracking-widest text-asb-gold hover:text-asb-gold-light transition-colors flex items-center justify-center gap-2 group">
-                                 Lihat Semua Galeri
-                                 <motion.span className="group-hover:translate-x-1 inline-block transition-transform">→</motion.span>
-                               </a>
+                              <a href="#brand-gallery" className="text-xs font-bold uppercase tracking-widest text-asb-gold hover:text-asb-gold-light transition-colors flex items-center justify-center gap-2 group">
+                                Lihat Semua Galeri
+                                <motion.span className="group-hover:translate-x-1 inline-block transition-transform">→</motion.span>
+                              </a>
                             </div>
                           </div>
                         </motion.div>
@@ -233,11 +229,10 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group ${
-                    showSolid
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group ${showSolid
                       ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
                       : 'text-white/80 hover:text-white'
-                  }`}
+                    }`}
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-asb-gold rounded-full transition-all duration-300 group-hover:w-6" />
@@ -248,11 +243,10 @@ export function Navbar() {
             <div className="flex items-center gap-2 ml-4">
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-full transition-all duration-300 ${
-                  showSolid
+                className={`p-2 rounded-full transition-all duration-300 ${showSolid
                     ? 'text-asb-black/60 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                     : 'text-white/70 hover:text-white hover:bg-white/10'
-                }`}
+                  }`}
                 aria-label="Toggle Dark Mode"
               >
                 {isDark ? <Sun size={16} /> : <Moon size={16} />}
@@ -274,21 +268,19 @@ export function Navbar() {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full transition-colors ${
-                showSolid
+              className={`p-2 rounded-full transition-colors ${showSolid
                   ? 'text-asb-black/60 dark:text-gray-300'
                   : 'text-white/70'
-              }`}
+                }`}
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${
-                showSolid
+              className={`p-2 rounded-lg transition-colors ${showSolid
                   ? 'text-asb-green-dark dark:text-gray-300'
                   : 'text-white'
-              }`}
+                }`}
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -320,66 +312,64 @@ export function Navbar() {
                   <X size={20} />
                 </button>
               </div>
-              
+
               <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2 custom-scrollbar">
                 {links.map((link, i) => {
                   if (link.isDropdown) {
                     return (
                       <div key="mobile-product" className="block w-full">
-                         <button 
-                           onClick={() => setIsMobileProductOpen(!isMobileProductOpen)}
-                           className={`flex w-full items-center justify-between px-4 py-3 font-semibold text-sm rounded-lg transition-all ${
-                             isMobileProductOpen 
-                             ? 'bg-asb-green-dark/5 dark:bg-asb-gold/10 text-asb-green-dark dark:text-asb-gold' 
-                             : 'text-asb-black/80 dark:text-gray-300 hover:bg-asb-surface dark:hover:bg-gray-800'
-                           }`}
-                         >
-                           {link.name}
-                           <ChevronDown size={16} className={`transition-transform duration-300 ${isMobileProductOpen ? 'rotate-180' : ''}`} />
-                         </button>
-                         <AnimatePresence>
-                           {isMobileProductOpen && (
-                             <motion.div
-                               initial={{ height: 0, opacity: 0 }}
-                               animate={{ height: 'auto', opacity: 1 }}
-                               exit={{ height: 0, opacity: 0 }}
-                               className="overflow-hidden bg-white dark:bg-gray-800/40 rounded-xl my-2 border border-gray-100 dark:border-gray-800"
-                             >
-                                <div className="p-3">
-                                  {/* Filter Chips Mobile */}
-                                  <div className="flex overflow-x-auto gap-2 pb-3 mb-2 custom-scrollbar hide-scrollbar">
-                                    {filters.map(filter => (
-                                      <button
-                                        key={`m-${filter}`}
-                                        onClick={() => setActiveFilter(filter)}
-                                        className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
-                                          activeFilter === filter 
+                        <button
+                          onClick={() => setIsMobileProductOpen(!isMobileProductOpen)}
+                          className={`flex w-full items-center justify-between px-4 py-3 font-semibold text-sm rounded-lg transition-all ${isMobileProductOpen
+                              ? 'bg-asb-green-dark/5 dark:bg-asb-gold/10 text-asb-green-dark dark:text-asb-gold'
+                              : 'text-asb-black/80 dark:text-gray-300 hover:bg-asb-surface dark:hover:bg-gray-800'
+                            }`}
+                        >
+                          {link.name}
+                          <ChevronDown size={16} className={`transition-transform duration-300 ${isMobileProductOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        <AnimatePresence>
+                          {isMobileProductOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-white dark:bg-gray-800/40 rounded-xl my-2 border border-gray-100 dark:border-gray-800"
+                            >
+                              <div className="p-3">
+                                {/* Filter Chips Mobile */}
+                                <div className="flex overflow-x-auto gap-2 pb-3 mb-2 custom-scrollbar hide-scrollbar">
+                                  {filters.map(filter => (
+                                    <button
+                                      key={`m-${filter}`}
+                                      onClick={() => setActiveFilter(filter)}
+                                      className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${activeFilter === filter
                                           ? 'bg-asb-green-dark text-white dark:bg-asb-gold dark:text-asb-black shadow-md'
                                           : 'bg-gray-50 dark:bg-gray-700 text-asb-black/60 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
                                         }`}
-                                      >
-                                        {filter}
-                                      </button>
-                                    ))}
-                                  </div>
-                                  
-                                  {/* Grid Mobile */}
-                                  <div className="grid grid-cols-2 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
-                                    {filteredBrands.map(brand => (
-                                      <div key={brand.id} className="bg-gray-50 dark:bg-gray-800/80 rounded-xl p-1">
-                                        <BrandLogoItem brand={brand} />
-                                      </div>
-                                    ))}
-                                    {filteredBrands.length === 0 && (
-                                       <div className="col-span-2 text-center py-6 text-xs text-gray-400">
-                                          Tidak ada produk
-                                       </div>
-                                    )}
-                                  </div>
+                                    >
+                                      {filter}
+                                    </button>
+                                  ))}
                                 </div>
-                             </motion.div>
-                           )}
-                         </AnimatePresence>
+
+                                {/* Grid Mobile */}
+                                <div className="grid grid-cols-2 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
+                                  {filteredBrands.map(brand => (
+                                    <div key={brand.id} className="bg-gray-50 dark:bg-gray-800/80 rounded-xl p-1">
+                                      <BrandLogoItem brand={brand} />
+                                    </div>
+                                  ))}
+                                  {filteredBrands.length === 0 && (
+                                    <div className="col-span-2 text-center py-6 text-xs text-gray-400">
+                                      Tidak ada produk
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     );
                   }
@@ -398,7 +388,7 @@ export function Navbar() {
                   );
                 })}
               </div>
-              
+
               <div className="p-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shrink-0">
                 <a
                   href="https://wa.me/6285270201945"
@@ -414,9 +404,10 @@ export function Navbar() {
           </>
         )}
       </AnimatePresence>
-      
+
       {/* Required CSS for custom scrollbar within dropdown menus */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 5px;
           height: 5px;
