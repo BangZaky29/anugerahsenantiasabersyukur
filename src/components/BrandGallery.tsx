@@ -15,6 +15,7 @@ interface Photo {
   brand_id: number | null;
   category_name: string | null;
   brand_name: string | null;
+  brand_external_link?: string | null;
   uploaded_at: string;
 }
 
@@ -62,7 +63,12 @@ function PhotoLogo({ photo, index }: { photo: Photo; index: number }) {
       className={`group relative flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-125 hover:z-20 ${scatterClass}`}
       title={displayName}
     >
-      <div className="relative dark:bg-white/95 dark:px-4 dark:py-3 dark:rounded-2xl dark:shadow-xl dark:border dark:border-white/20 transition-all duration-300 group-hover:shadow-2xl">
+      <a 
+        href={photo.brand_external_link || '#'} 
+        target={photo.brand_external_link ? "_blank" : "_self"}
+        rel="noreferrer"
+        className="relative block dark:bg-white/95 dark:px-4 dark:py-3 dark:rounded-2xl dark:shadow-xl dark:border dark:border-white/20 transition-all duration-300 group-hover:shadow-2xl"
+      >
         <img
           src={`${API_URL}/${photo.filepath}`}
           alt={displayName}
@@ -73,7 +79,7 @@ function PhotoLogo({ photo, index }: { photo: Photo; index: number }) {
             imgLoaded ? 'opacity-100 filter-none' : 'opacity-0 blur-md'
           } brightness-100 group-hover:brightness-110 drop-shadow-sm group-hover:drop-shadow-lg`}
         />
-      </div>
+      </a>
     </motion.div>
   );
 }
