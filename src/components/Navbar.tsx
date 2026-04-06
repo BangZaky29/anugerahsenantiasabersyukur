@@ -26,7 +26,7 @@ export function Navbar() {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>('All');
 
-  const filters = ['All', 'Mechanical', 'Electrical', 'Machine ', 'Tools'];
+  const filters = ['All', 'Mechanical', 'Electrical', 'Machine', 'Tools'];
 
   const { scrollY } = useScroll();
 

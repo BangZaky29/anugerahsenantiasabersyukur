@@ -131,7 +131,7 @@ export function BrandGallery() {
 
   // ── FILTER TABS ─────────────────────────────────────────────────────
   const tabs = [
-    { id: null, label: 'Semua' },
+    { id: null, label: 'All' },
     ...categories.map((c) => ({ id: c.id, label: c.name })),
   ];
 
