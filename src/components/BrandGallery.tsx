@@ -52,7 +52,7 @@ function PhotoLogo({ photo, index }: { photo: Photo; index: number }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.5, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.5 }}
+      exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.15, delay: 0 } }}
       transition={{
         duration: 0.6,
         delay: index * 0.05,
@@ -104,8 +104,9 @@ export function BrandGallery() {
 
   // Fetch photos
   useEffect(() => {
+    let isMounted = true;
     setLoading(true);
-    setPhotos([]); // Clear existing photos to ensure clean exit animation
+    setPhotos([]); // INSTANT CLEAR to avoid staggered exit delays completely
     setError(null);
 
     const url = activeCategory
@@ -117,9 +118,10 @@ export function BrandGallery() {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       }),
-      new Promise(resolve => setTimeout(resolve, 800)) // 800ms minimum delay for premium animation feel
+      new Promise(resolve => setTimeout(resolve, 1000)) // 1000ms delay to guarantee visible loading screen
     ])
       .then(([data]) => {
+        if (!isMounted) return;
         if (data.success) {
           setPhotos(data.data);
         } else {
@@ -127,9 +129,16 @@ export function BrandGallery() {
         }
       })
       .catch((err) => {
+        if (!isMounted) return;
         setError(err.message || 'Gagal memuat data dari server');
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [activeCategory]);
 
   // ── FILTER TABS ─────────────────────────────────────────────────────
@@ -219,17 +228,18 @@ export function BrandGallery() {
 
         {/* ── ALIGNMENT & SCATTER LOGOS ─────────────────────────────── */}
         {!error && (
-          <div className="relative min-h-[300px] flex items-center justify-center">
+          <div className="relative min-h-[450px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               {loading ? (
                 <motion.div
                   key="loading"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.15 }}
                   className="absolute inset-0 flex flex-col items-center justify-center pt-10"
                 >
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mb-4">
                     {[1, 2, 3].map((i) => (
                       <motion.div
                         key={i}
@@ -239,6 +249,9 @@ export function BrandGallery() {
                       />
                     ))}
                   </div>
+                  <span className="text-sm text-asb-black/50 dark:text-gray-400 font-medium animate-pulse uppercase tracking-widest">
+                    Memuat Galeri...
+                  </span>
                 </motion.div>
               ) : photos.length === 0 ? (
                 <motion.div

@@ -25,6 +25,13 @@ export function Navbar() {
 
   const [brands, setBrands] = useState<Brand[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [isFiltering, setIsFiltering] = useState(false);
+
+  useEffect(() => {
+    setIsFiltering(true);
+    const tmr = setTimeout(() => setIsFiltering(false), 400);
+    return () => clearTimeout(tmr);
+  }, [activeFilter]);
 
   const filters = ['All', 'Mechanical', 'Electrical', 'Machine', 'Tools'];
 
@@ -102,7 +109,7 @@ export function Navbar() {
             <LayoutGrid className="text-gray-300 dark:text-gray-600 w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
           )}
         </div>
-        <span className="text-[10px] sm:text-xs font-semibold text-center text-asb-black/60 dark:text-gray-400 group-hover:text-asb-green-dark dark:group-hover:text-white transition-colors truncate w-full px-1">
+        <span className="text-[10px] sm:text-xs font-semibold text-center text-asb-black/60 dark:text-gray-400 group-hover:text-asb-green-dark dark:group-hover:text-white transition-colors w-full px-0.5 leading-snug tracking-tight break-words whitespace-normal line-clamp-2">
           {displayName}
         </span>
       </a>
@@ -197,7 +204,21 @@ export function Navbar() {
 
                                 {/* Right Side: Logo Grid */}
                                 <div className="w-2/3 xl:w-3/4 pl-2 lg:h-[300px] overflow-y-auto custom-scrollbar">
-                                  {filteredBrands.length === 0 ? (
+                                  {isFiltering ? (
+                                    <div className="flex flex-col items-center justify-center h-full text-center p-6 opacity-80">
+                                      <div className="flex gap-2">
+                                        {[1, 2, 3].map((i) => (
+                                          <motion.div
+                                            key={i}
+                                            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
+                                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2 }}
+                                            className="w-2 h-2 bg-asb-gold rounded-full"
+                                          />
+                                        ))}
+                                      </div>
+                                      <span className="text-xs text-gray-400 mt-4 animate-pulse">Memuat Katalog...</span>
+                                    </div>
+                                  ) : filteredBrands.length === 0 ? (
                                     <div className="flex flex-col items-center justify-center h-full text-center p-6 opacity-60">
                                       <LayoutGrid className="w-10 h-10 mb-3 text-gray-300 dark:text-gray-600" />
                                       <span className="text-sm dark:text-gray-400">Tidak ada brand untuk kategori ini</span>
