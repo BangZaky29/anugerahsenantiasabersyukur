@@ -24,7 +24,7 @@ export function Navbar() {
   const [isMobileProductOpen, setIsMobileProductOpen] = useState(false);
 
   const [brands, setBrands] = useState<Brand[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>('Semua');
+  const [activeFilter, setActiveFilter] = useState<string>('All');
 
   const filters = ['All', 'Mechanical', 'Electrical', 'Machine ', 'Tools'];
 
@@ -75,7 +75,7 @@ export function Navbar() {
   const showSolid = hasScrolled || isOpen || isProductHovered;
 
   const filteredBrands = brands.filter(b => {
-    if (activeFilter === 'Semua') return true;
+    if (activeFilter === 'All') return true;
     return b.type?.toLowerCase() === activeFilter.toLowerCase();
   });
 
@@ -115,10 +115,10 @@ export function Navbar() {
       animate={{ y: isHidden && !isOpen ? -100 : 0 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed w-full z-50 transition-all duration-500 ${isOpen
-          ? 'bg-asb-white dark:bg-gray-900 shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
-          : showSolid
-            ? 'glass dark:glass-dark shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
-            : 'bg-transparent'
+        ? 'bg-asb-white dark:bg-gray-900 shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
+        : showSolid
+          ? 'glass dark:glass-dark shadow-sm border-b border-gray-200/30 dark:border-gray-700/30'
+          : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,8 +132,8 @@ export function Navbar() {
                 className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <span className={`font-heading font-bold text-sm lg:text-base hidden sm:block transition-all duration-300 ${showSolid
-                  ? 'text-asb-green-dark dark:text-white'
-                  : 'text-white'
+                ? 'text-asb-green-dark dark:text-white'
+                : 'text-white'
                 }`}>
                 PT ASB
               </span>
@@ -154,8 +154,8 @@ export function Navbar() {
                     <a
                       href={link.href}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group flex items-center gap-1 ${showSolid
-                          ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
-                          : 'text-white/80 hover:text-white'
+                        ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
+                        : 'text-white/80 hover:text-white'
                         } ${isProductHovered ? (showSolid ? 'text-asb-green-dark dark:text-white' : 'text-white') : ''}`}
                     >
                       {link.name}
@@ -186,8 +186,8 @@ export function Navbar() {
                                       key={filter}
                                       onClick={() => setActiveFilter(filter)}
                                       className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeFilter === filter
-                                          ? 'bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black shadow-md shadow-asb-green-dark/20'
-                                          : 'text-asb-black/70 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-asb-green-dark dark:hover:text-gray-200'
+                                        ? 'bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black shadow-md shadow-asb-green-dark/20'
+                                        : 'text-asb-black/70 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-asb-green-dark dark:hover:text-gray-200'
                                         }`}
                                     >
                                       {filter}
@@ -230,8 +230,8 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 group ${showSolid
-                      ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
-                      : 'text-white/80 hover:text-white'
+                    ? 'text-asb-black/70 dark:text-gray-300 hover:text-asb-green-dark dark:hover:text-white'
+                    : 'text-white/80 hover:text-white'
                     }`}
                 >
                   {link.name}
@@ -244,8 +244,8 @@ export function Navbar() {
               <button
                 onClick={toggleTheme}
                 className={`p-2 rounded-full transition-all duration-300 ${showSolid
-                    ? 'text-asb-black/60 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'text-asb-black/60 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
                 aria-label="Toggle Dark Mode"
               >
@@ -269,8 +269,8 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-full transition-colors ${showSolid
-                  ? 'text-asb-black/60 dark:text-gray-300'
-                  : 'text-white/70'
+                ? 'text-asb-black/60 dark:text-gray-300'
+                : 'text-white/70'
                 }`}
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -278,8 +278,8 @@ export function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-lg transition-colors ${showSolid
-                  ? 'text-asb-green-dark dark:text-gray-300'
-                  : 'text-white'
+                ? 'text-asb-green-dark dark:text-gray-300'
+                : 'text-white'
                 }`}
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -321,8 +321,8 @@ export function Navbar() {
                         <button
                           onClick={() => setIsMobileProductOpen(!isMobileProductOpen)}
                           className={`flex w-full items-center justify-between px-4 py-3 font-semibold text-sm rounded-lg transition-all ${isMobileProductOpen
-                              ? 'bg-asb-green-dark/5 dark:bg-asb-gold/10 text-asb-green-dark dark:text-asb-gold'
-                              : 'text-asb-black/80 dark:text-gray-300 hover:bg-asb-surface dark:hover:bg-gray-800'
+                            ? 'bg-asb-green-dark/5 dark:bg-asb-gold/10 text-asb-green-dark dark:text-asb-gold'
+                            : 'text-asb-black/80 dark:text-gray-300 hover:bg-asb-surface dark:hover:bg-gray-800'
                             }`}
                         >
                           {link.name}
@@ -344,8 +344,8 @@ export function Navbar() {
                                       key={`m-${filter}`}
                                       onClick={() => setActiveFilter(filter)}
                                       className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${activeFilter === filter
-                                          ? 'bg-asb-green-dark text-white dark:bg-asb-gold dark:text-asb-black shadow-md'
-                                          : 'bg-gray-50 dark:bg-gray-700 text-asb-black/60 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                        ? 'bg-asb-green-dark text-white dark:bg-asb-gold dark:text-asb-black shadow-md'
+                                        : 'bg-gray-50 dark:bg-gray-700 text-asb-black/60 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
                                         }`}
                                     >
                                       {filter}
