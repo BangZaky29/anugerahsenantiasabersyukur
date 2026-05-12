@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 export function WhatsAppWidget() {
   return (
     <motion.a
-      href="https://wa.me/6285270201945"
+      href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`}
       target="_blank"
       rel="noreferrer"
       initial={{ scale: 0, opacity: 0 }}

@@ -11,7 +11,7 @@ export function Contact() {
     {
       icon: <Phone size={20} />,
       title: 'Phone',
-      content: '0852-7020-1945',
+      content: import.meta.env.VITE_WHATSAPP_DISPLAY,
       extra: 'Sales Director',
     },
     {
@@ -96,7 +96,7 @@ export function Contact() {
               className="pt-4"
             >
               <a
-                href="https://wa.me/6285270201945"
+                href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black font-semibold text-sm px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300 shadow-lg"

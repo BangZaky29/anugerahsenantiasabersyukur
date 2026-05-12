@@ -274,7 +274,7 @@ export function Navbar() {
               </button>
 
               <a
-                href="https://wa.me/6285270201945"
+                href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black text-xs font-semibold px-4 py-2 rounded-full hover:opacity-90 transition-all duration-300 shadow-sm"
@@ -412,7 +412,7 @@ export function Navbar() {
 
               <div className="p-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shrink-0">
                 <a
-                  href="https://wa.me/6285270201945"
+                  href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-asb-green-dark dark:bg-asb-gold text-white dark:text-asb-black rounded-xl font-bold text-sm shadow-lg shadow-asb-green-dark/20 hover:shadow-xl transition-all"
